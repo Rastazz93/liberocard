@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>LiberoCard — crea e scrivi il tuo biglietto NFC</title>
+<style>
+:root{--bg:#f3f5f8;--panel:#fff;--ink:#172033;--muted:#667085;--line:#dfe4ec;--accent:#6558f5;--shadow:0 14px 40px #17203312}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;font-weight:700}.primary{background:var(--accent);color:#fff}.secondary{background:#eef0ff;color:#353078}.plain{background:#f2f4f7;color:#344054}.danger{background:#fff0f0;color:#b42318}.wrap{max-width:1200px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:22px;letter-spacing:-.6px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#6558f5,#12b8a6);display:grid;place-items:center;color:#fff;font-size:22px}.tagline{color:var(--muted);font-size:13px}.privacy{border:1px solid #b8e5d2;background:#effcf6;color:#067647;padding:7px 11px;border-radius:99px;font-size:12px;font-weight:750;white-space:nowrap}.intro{margin:0 0 20px}.intro h1{font-size:clamp(25px,4vw,38px);line-height:1.1;letter-spacing:-1px;margin:0 0 9px}.intro p{color:var(--muted);margin:0;max-width:760px}.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:20px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:var(--shadow)}.panel h2{font-size:18px;margin:0 0 14px}.section{border-top:1px solid var(--line);padding-top:17px;margin-top:17px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:750;color:#344054}input,textarea,select{width:100%;padding:11px 12px;border:1px solid #cfd5df;border-radius:11px;background:#fff;color:var(--ink);outline:none}input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #6558f51a}textarea{min-height:75px;resize:vertical}.help{font-size:12px;color:var(--muted)}.colors{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.color{display:flex;align-items:center;gap:7px;font-size:13px}.color input{width:36px;height:34px;padding:2px}.themebuttons{display:flex;gap:8px;flex-wrap:wrap}.themebuttons button{border:1px solid var(--line);background:#fff}.themebuttons button.active{border-color:var(--accent);box-shadow:0 0 0 2px #6558f522}.socialgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.socialfield{display:flex;flex-direction:column;gap:5px}.socialfield label{font-size:12px}.previewbox{position:sticky;top:16px}.previewhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.previewhead h2{margin:0}.phone{max-width:390px;margin:auto;background:#111827;border:8px solid #111827;border-radius:34px;padding:0;overflow:hidden;box-shadow:0 20px 45px #10182830;min-height:590px}.screen{min-height:590px;padding:30px 21px 22px;background:linear-gradient(160deg,var(--cardbg),var(--cardbg2));color:var(--cardink);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}.avatar{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:#ffffff26;border:2px solid #ffffff75;font-size:36px;font-weight:800;margin:10px 0 17px}.avatar img{width:100%;height:100%;object-fit:cover}.pname{font-size:27px;line-height:1.15;font-weight:850;overflow-wrap:anywhere;margin:0 0 8px}.pdesc{font-size:13px;opacity:.8;margin:0 0 20px;white-space:pre-wrap;overflow-wrap:anywhere}.links{display:grid;gap:10px;width:100%;margin-top:3px}.linkbtn{padding:12px 14px;border-radius:13px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;font-weight:750;overflow-wrap:anywhere}.linkbtn span:last-child{opacity:.65}.foot{margin-top:auto;padding-top:25px;font-size:10px;opacity:.6}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.actions button{flex:1;min-width:130px}.notice{margin-top:16px;padding:12px 14px;background:#fffaeb;border:1px solid #fedf89;border-radius:12px;color:#93370d;font-size:12px}.status{min-height:22px;font-size:13px;color:#067647;margin-top:10px}.bottom{margin-top:22px;color:var(--muted);font-size:12px;text-align:center}.filelabel{display:inline-flex;align-items:center;gap:8px}.filelabel input{display:none}.smalllink{color:var(--accent);text-decoration:underline;cursor:pointer;background:none;padding:0;font-weight:600}@media(max-width:850px){.grid{grid-template-columns:1fr}.previewbox{position:static}.previewbox{order:-1}.phone{min-height:520px}.screen{min-height:520px}.wrap{padding:14px}.top{align-items:flex-start}.privacy{white-space:normal;text-align:center}.fields{grid-template-columns:1fr 1fr}}@media(max-width:460px){.fields,.socialgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.top{flex-direction:column}.panel{padding:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div><div class="brand"><span class="logo">↗</span> LiberoCard</div><div class="tagline">Il tuo biglietto digitale. Creato da te, senza account.</div></div>
+  <div class="privacy">● Nessuna registrazione · Nessun invio dei dati</div>
+</header>
+<section class="intro"><h1>Il tuo biglietto. Le tue regole.</h1><p>Personalizza il tuo profilo, aggiungi i contatti che vuoi e scarica una pagina HTML autonoma. Le informazioni inserite restano in questo browser: questo strumento non le invia a un nostro server.</p></section>
+<div class="grid">
+<section class="panel">
+  <h2>Personalizza il biglietto</h2>
+  <div class="fields">
+    <div class="field"><label for="name">Nome o attività *</label><input id="name" maxlength="80" placeholder="Es. Mario Rossi" value=""></div>
+    <div class="field"><label for="subtitle">Ruolo / descrizione</label><input id="subtitle" maxlength="140" placeholder="Es. Fotografo, artigiano…"></div>
+    <div class="field full"><label for="bio">Presentazione</label><textarea id="bio" maxlength="400" placeholder="Una breve descrizione (facoltativa)"></textarea></div>
+    <div class="field full"><label for="photo">Foto o logo</label><input id="photo" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><div class="help">Resta sul dispositivo; immagini fino a 2 MB.</div></div>
+  </div>
+  <div class="section"><h2>Contatti e social</h2><p class="help">Inserisci solo i collegamenti che vuoi mostrare. Puoi incollare un link oppure uno username; per WhatsApp usa il numero con prefisso internazionale.</p>
+    <div class="socialgrid">
+      <div class="socialfield"><label for="instagram">Instagram</label><input id="instagram" placeholder="@utente o link"></div>
+      <div class="socialfield"><label for="facebook">Facebook</label><input id="facebook" placeholder="Link del profilo"></div>
+      <div class="socialfield"><label for="tiktok">TikTok</label><input id="tiktok" placeholder="@utente o link"></div>
+      <div class="socialfield"><label for="whatsapp">WhatsApp</label><input id="whatsapp" placeholder="+39… o link"></div>
+      <div class="socialfield"><label for="telegram">Telegram</label><input id="telegram" placeholder="@utente o link"></div>
+      <div class="socialfield"><label for="snapchat">Snapchat</label><input id="snapchat" placeholder="Username o link"></div>
+      <div class="socialfield"><label for="email">Email</label><input id="email" type="email" placeholder="nome@esempio.it"></div>
+      <div class="socialfield"><label for="website">Sito web</label><input id="website" placeholder="https://…"></div>
+      <div class="socialfield"><label for="phone">Telefono</label><input id="phone" placeholder="+39…"></div>
+      <div class="socialfield"><label for="linkedin">LinkedIn</label><input id="linkedin" placeholder="Link del profilo"></div>
+    </div>
+  </div>
+  <div class="section"><h2>Stile grafico</h2>
+    <div class="themebuttons">
+      <button type="button" class="active" data-theme="dark">Scuro</button><button type="button" data-theme="light">Chiaro</button><button type="button" data-theme="neon">Neon</button><button type="button" data-theme="nature">Natura</button>
+    </div>
+    <div class="colors" style="margin-top:14px">
+      <div class="color"><label for="bg1">Sfondo</label><input id="bg1" type="color" value="#171a2b"></div>
+      <div class="color"><label for="bg2">Secondo colore</label><input id="bg2" type="color" value="#393568"></div>
+      <div class="color"><label for="ink">Testo</label><input id="ink" type="color" value="#ffffff"></div>
+      <div class="color"><label for="accent">Pulsanti</label><input id="accent" type="color" value="#8b82ff"></div>
+    </div>
+  </div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <div class="section" id="nfcGuided">
+    <h2>Il tuo biglietto è pronto?</h2>
+    <p class="help">Personalizza il biglietto e premi il pulsante. LiberoCard crea un link condivisibile direttamente nel browser e ti guida nella scrittura del tag.</p>
+    <div class="actions"><button class="primary" id="generateNfc" type="button">Genera NFC</button></div>
+    <div id="nfcWizard" hidden>
+      <div class="wizard-step"><strong>1. Preparazione del link</strong><p id="wizardIntro">Preparazione in corso…</p><p id="generatedUrlWrap" hidden><label for="generatedUrl">Link del biglietto</label><input id="generatedUrl" readonly><button class="plain" id="copyUrl" type="button">Copia link</button></p></div>
+      <div class="wizard-step"><strong>2. Prepara il telefono e il tag</strong><p>Apri questa pagina su Chrome da un telefono Android con NFC attivo. Tieni pronto un tag NFC vuoto o riscrivibile. Quando premi “Scrivi sul tag”, avvicina il tag al telefono solo quando richiesto.</p><p class="help">Il link contiene i dati testuali del biglietto nella parte privata dell'indirizzo (dopo #): il server non riceve quei dati. Per mantenere il link abbastanza corto, la foto/logo non viene inserita nel tag. Se il link è troppo lungo per il tag, l'editor ti avviserà.</p></div>
+      <div class="wizard-step"><strong>3. Scrivi e verifica</strong><div class="actions"><button class="primary" id="writeNfc" type="button" disabled>Scrivi sul tag NFC</button><button class="plain" id="testNfc" type="button">Verifica compatibilità</button></div></div>
+      <div id="nfcStatus" class="status" role="status" aria-live="polite"></div>
+    </div>
+    <div class="notice"><strong>Privacy:</strong> nessun account e nessun database. I dati del biglietto sono codificati nel link e restano dopo il simbolo #, che il browser non invia al server. Chi possiede il link può visualizzare e condividere il biglietto. Evita dati che non vuoi rendere pubblici.</div>
+  </div>
+</section>
+<aside class="previewbox">
+  <div class="panel">
+    <div class="previewhead"><h2>Anteprima live</h2><span class="help">Mobile</span></div>
+    <div class="phone"><div class="screen" id="screen">
+      <div class="avatar" id="avatar">?</div><h3 class="pname" id="pname">Il tuo nome</h3><div class="pdesc" id="pdesc">La tua descrizione apparirà qui</div><div class="links" id="links"></div><div class="foot">Creato con LiberoCard</div>
+    </div></div>
+    <div class="help" style="margin-top:12px">L'anteprima si aggiorna mentre scrivi. I contatti vuoti non saranno mostrati.</div>
+  </div>
+</aside>
+</div>
+<div class="bottom">LiberoCard — prototipo gratuito e senza account. Nessun dato viene inviato da questo editor.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const fields=['name','subtitle','bio','instagram','facebook','tiktok','whatsapp','telegram','snapchat','email','website','phone','linkedin'];
+let photoData='',theme='dark';
+const themeVals={
+ dark:['#171a2b','#393568','#ffffff','#8b82ff'],
+ light:['#f8fafc','#e8edff','#172033','#6558f5'],
+ neon:['#130c25','#3b0b55','#ffffff','#f472b6'],
+ nature:['#15382f','#2e6751','#f3fff8','#8dd6ae']
+};
+const labels={instagram:'Instagram',facebook:'Facebook',tiktok:'TikTok',whatsapp:'WhatsApp',telegram:'Telegram',snapchat:'Snapchat',email:'Email',website:'Sito web',phone:'Telefono',linkedin:'LinkedIn'};
+function cleanUrl(id,val){
+ val=(val||'').trim(); if(!val)return '';
+ if(id==='email')return 'mailto:'+val;
+ if(id==='phone')return 'tel:'+val.replace(/[^\d+]/g,'');
+ if(id==='whatsapp'){
+  if(/^https?:\/\//i.test(val))return val;
+  const n=val.replace(/\D/g,'');return n?'https://wa.me/'+n:'';
+ }
+ if(id==='instagram'&&!/^https?:\/\//i.test(val))return 'https://www.instagram.com/'+val.replace(/^@/,'')+'/';
+ if(id==='facebook'&&!/^https?:\/\//i.test(val))return 'https://www.facebook.com/'+val.replace(/^@/,'');
+ if(id==='tiktok'&&!/^https?:\/\//i.test(val))return 'https://www.tiktok.com/@'+val.replace(/^@/,'');
+ if(id==='telegram'&&!/^https?:\/\//i.test(val))return 'https://t.me/'+val.replace(/^@/,'');
+ if(id==='snapchat'&&!/^https?:\/\//i.test(val))return 'https://www.snapchat.com/add/'+val.replace(/^@/,'');
+ if(id==='linkedin'&&!/^https?:\/\//i.test(val))return 'https://www.linkedin.com/in/'+val.replace(/^@/,'');
+ if(id==='website'&&!/^https?:\/\//i.test(val))return 'https://'+val;
+ return val;
+}
+function getData(){
+ const d={};fields.forEach(id=>d[id]=$(id).value.trim());
+ d.photo=photoData;d.theme=theme;d.colors={bg1:$('bg1').value,bg2:$('bg2').value,ink:$('ink').value,accent:$('accent').value};return d;
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(){
+ const d=getData();$('screen').style.setProperty('--cardbg',d.colors.bg1);$('screen').style.setProperty('--cardbg2',d.colors.bg2);$('screen').style.setProperty('--cardink',d.colors.ink);
+ $('screen').style.background=`linear-gradient(155deg,${d.colors.bg1},${d.colors.bg2})`;$('screen').style.color=d.colors.ink;
+ $('pname').textContent=d.name||'Il tuo nome';$('pdesc').textContent=[d.subtitle,d.bio].filter(Boolean).join('\n\n')||'La tua descrizione apparirà qui';
+ const av=$('avatar');av.innerHTML=d.photo?'<img alt="Foto o logo" src="'+d.photo+'">':esc((d.name||'?').trim().slice(0,1).toUpperCase());
+ const links=$('links');links.innerHTML='';
+ fields.filter(id=>labels[id]&&d[id]).forEach(id=>{
+  let url=cleanUrl(id,d[id]);if(!url)return;
+  const a=document.createElement('a');a.className='linkbtn';a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.style.background=d.colors.accent;a.style.color=contrast(d.colors.accent);
+  const left=document.createElement('span');left.textContent=labels[id];const right=document.createElement('span');right.textContent='↗';a.append(left,right);links.appendChild(a);
+ });
+}
+function contrast(hex){const x=hex.replace('#','');const n=parseInt(x,16);const r=(n>>16)&255,g=(n>>8)&255,b=n&255;return (r*299+g*587+b*114)/1000>150?'#172033':'#ffffff';}
+fields.forEach(id=>$(id).addEventListener('input',render));
+['bg1','bg2','ink','accent'].forEach(id=>$(id).addEventListener('input',render));
+document.querySelectorAll('[data-theme]').forEach(btn=>btn.addEventListener('click',()=>{theme=btn.dataset.theme;const v=themeVals[theme];['bg1','bg2','ink','accent'].forEach((id,i)=>$(id).value=v[i]);document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('active',b===btn));render();}));
+$('photo').addEventListener('change',()=>{const f=$('photo').files[0];if(!f){photoData='';render();return;}if(f.size>2*1024*1024){$('status').textContent='Immagine troppo grande: scegli un file sotto 2 MB.';$('photo').value='';return;}const r=new FileReader();r.onload=()=>{photoData=r.result;render();};r.readAsDataURL(f);});
+function standalone(d){
+ const btns=fields.filter(id=>labels[id]&&d[id]).map(id=>{const url=cleanUrl(id,d[id]);return url?`<a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><span>${esc(labels[id])}</span><span>↗</span></a>`:''}).join('\n');
+ const initial=(d.name||'?').trim().slice(0,1).toUpperCase();
+ return `<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="${d.colors.bg1}"><title>${esc(d.name||'Biglietto digitale')}</title>
+<style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:#eef0f5;font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.card{width:min(100%,410px);min-height:620px;border-radius:28px;padding:34px 24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;color:${d.colors.ink};background:linear-gradient(155deg,${d.colors.bg1},${d.colors.bg2});box-shadow:0 20px 55px #0002}.avatar{width:100px;height:100px;border-radius:50%;overflow:hidden;display:grid;place-items:center;font-size:36px;font-weight:800;background:#ffffff25;border:2px solid #ffffff70;margin:5px 0 18px}.avatar img{width:100%;height:100%;object-fit:cover}.name{font-size:28px;line-height:1.15;font-weight:850;overflow-wrap:anywhere;margin:0 0 8px}.desc{font-size:14px;opacity:.85;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 22px}.links{display:grid;gap:10px;width:100%}.btn{padding:13px 15px;border-radius:13px;background:${d.colors.accent};color:${contrast(d.colors.accent)};text-decoration:none;font-weight:750;display:flex;justify-content:space-between;gap:10px;overflow-wrap:anywhere}.btn span:last-child{opacity:.65}.foot{margin-top:auto;padding-top:28px;font-size:10px;opacity:.6}</style></head><body><main class="card"><div class="avatar">${d.photo?`<img alt="Foto o logo" src="${d.photo}">`:esc(initial)}</div><h1 class="name">${esc(d.name||'Biglietto digitale')}</h1><div class="desc">${esc([d.subtitle,d.bio].filter(Boolean).join('\\n\\n'))}</div><nav class="links">${btns}</nav><div class="foot">Biglietto digitale personale</div></main></body></html>`;
+}
+function downloadFile(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+render();
+
+// If the URL carries a card payload, render the public card instead of the editor.
+const CARD_PREFIX = '#card=';
+function b64url(bytes){let bin='';for(const b of bytes)bin+=String.fromCharCode(b);return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function fromB64url(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';const bin=atob(str);return Uint8Array.from(bin,c=>c.charCodeAt(0));}
+async function encodeCard(d){
+  const compact={n:d.name||'',s:d.subtitle||'',b:d.bio||'',t:d.theme||'',c:d.colors||{},l:{}};
+  fields.filter(id=>labels[id]&&d[id]).forEach(id=>compact.l[id]=d[id]);
+  const bytes=new TextEncoder().encode(JSON.stringify(compact));
+  if(!('CompressionStream' in window)) throw new Error('Il browser non supporta la compressione necessaria. Aggiorna Chrome o Edge.');
+  const cs=new CompressionStream('gzip');const writer=cs.writable.getWriter();writer.write(bytes);writer.close();
+  const compressed=new Uint8Array(await new Response(cs.readable).arrayBuffer());
+  return b64url(compressed);
+}
+async function decodeCard(encoded){
+ const compressed=fromB64url(encoded);if(!('DecompressionStream' in window))throw new Error('Browser non compatibile. Aggiorna Chrome, Safari o Edge.');
+ const ds=new DecompressionStream('gzip');const writer=ds.writable.getWriter();writer.write(compressed);writer.close();
+ return JSON.parse(new TextDecoder().decode(await new Response(ds.readable).arrayBuffer()));
+}
+function publicCard(d){
+ document.body.innerHTML='';document.body.style.cssText='margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:#eef0f5;font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif';
+ const card=document.createElement('main');card.style.cssText=`width:min(100%,410px);min-height:560px;border-radius:28px;padding:34px 24px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;color:${d.c?.ink||'#fff'};background:linear-gradient(155deg,${d.c?.bg1||'#111827'},${d.c?.bg2||'#334155'});box-shadow:0 20px 55px #0002;box-sizing:border-box`;
+ const avatar=document.createElement('div');avatar.textContent=(d.n||'?').trim().slice(0,1).toUpperCase();avatar.style.cssText='width:100px;height:100px;border-radius:50%;display:grid;place-items:center;font-size:36px;font-weight:800;background:#ffffff25;border:2px solid #ffffff70;margin:5px 0 18px';
+ const name=document.createElement('h1');name.textContent=d.n||'Biglietto digitale';name.style.cssText='font-size:28px;line-height:1.15;font-weight:850;overflow-wrap:anywhere;margin:0 0 8px';
+ const desc=document.createElement('div');desc.textContent=[d.s,d.b].filter(Boolean).join('\n\n');desc.style.cssText='font-size:14px;opacity:.85;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 22px';
+ const nav=document.createElement('nav');nav.style.cssText='display:grid;gap:10px;width:100%';
+ const labs={instagram:'Instagram',facebook:'Facebook',tiktok:'TikTok',whatsapp:'WhatsApp',telegram:'Telegram',snapchat:'Snapchat',email:'Email',website:'Sito web',phone:'Telefono',linkedin:'LinkedIn'};
+ Object.entries(d.l||{}).forEach(([id,val])=>{const href=cleanUrl(id,val);if(!href)return;const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=(labs[id]||id)+'  ↗';a.style.cssText=`padding:13px 15px;border-radius:13px;background:${d.c?.accent||'#6558f5'};color:${contrast(d.c?.accent||'#6558f5')};text-decoration:none;font-weight:750;overflow-wrap:anywhere`;nav.append(a);});
+ const foot=document.createElement('div');foot.textContent='Biglietto digitale LiberoCard';foot.style.cssText='margin-top:auto;padding-top:28px;font-size:10px;opacity:.6';card.append(avatar,name,desc,nav,foot);document.body.append(card);document.title=(d.n||'Biglietto digitale')+' — LiberoCard';
+}
+async function bootCardFlow(){
+if(location.hash.startsWith(CARD_PREFIX)){
+ document.querySelector('.top')?.remove();document.querySelector('.intro')?.remove();document.querySelector('.grid')?.remove();document.querySelector('.bottom')?.remove();
+ try{publicCard(await decodeCard(location.hash.slice(CARD_PREFIX.length)));}catch(e){document.body.innerHTML='<p style="font:16px system-ui;padding:24px">Questo link LiberoCard non è valido o il browser non è compatibile.</p>';}
+}else{
+ const wizard=$('nfcWizard'), generate=$('generateNfc'), write=$('writeNfc'), status=$('nfcStatus');let nfcUrl='';
+ generate.addEventListener('click',async()=>{
+   wizard.hidden=false;status.textContent='';write.disabled=true;
+   if(location.protocol!=='https:'){status.textContent='Per creare un link pubblico valido, apri prima LiberoCard dal sito HTTPS pubblicato, non dal file locale.';return;}
+   const d=getData();if(!d.name){status.textContent='Inserisci almeno il nome o il nome dell’attività.';$('name').focus();return;}
+   $('wizardIntro').textContent='Creo un link personale senza caricare i dati su un server…';
+   try{
+    const payload=await encodeCard(d);nfcUrl=location.origin+location.pathname+CARD_PREFIX+payload;
+    $('generatedUrl').value=nfcUrl;$('generatedUrlWrap').hidden=false;
+    const bytes=new TextEncoder().encode(nfcUrl).length;
+    if(bytes>450){$('wizardIntro').textContent=`Link creato (${bytes} byte), ma è troppo lungo per molti tag NFC. Riduci la descrizione e il numero di link social, poi premi Genera NFC di nuovo.`;write.disabled=true;status.textContent='Il link è troppo lungo per una scrittura affidabile. Alcuni tag grandi possono supportarlo, ma non è garantito.';}
+    else{$('wizardIntro').textContent=`Link creato (${bytes} byte). Non è stato caricato nessun dato personale su un server.`;write.disabled=false;}
+   }catch(e){$('wizardIntro').textContent='Non sono riuscito a creare il link.';status.textContent=e.message||String(e);}
+   wizard.scrollIntoView({behavior:'smooth',block:'nearest'});
+ });
+ $('copyUrl').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(nfcUrl);status.textContent='Link copiato negli appunti.';}catch(e){$('generatedUrl').select();status.textContent='Seleziona e copia il link manualmente.';}});
+ $('testNfc').addEventListener('click',()=>{status.textContent=!window.isSecureContext?'Apri LiberoCard tramite HTTPS.':!('NDEFReader' in window)?'Web NFC non è supportato da questo browser/dispositivo. Usa Chrome su Android compatibile.':'Web NFC disponibile: usa un tag NDEF scrivibile e concedi il permesso quando richiesto.';});
+ write.addEventListener('click',async()=>{
+  if(!nfcUrl){status.textContent='Prima premi Genera NFC.';return;}
+  if(!window.isSecureContext){status.textContent='Apri LiberoCard tramite HTTPS.';return;}
+  if(!('NDEFReader' in window)){status.textContent='Questo browser non supporta la scrittura NFC. Prova Chrome su Android compatibile.';return;}
+  try{await new NDEFReader().write({records:[{recordType:'url',data:nfcUrl}]});status.textContent='Tag scritto! Avvicina di nuovo il telefono al tag per controllare che apra il biglietto.';}
+  catch(e){status.textContent='Scrittura non riuscita: '+(e.message||e.name||'errore NFC')+'. Verifica che NFC sia attivo e che il tag sia scrivibile.';}
+ });
+}
+}
+bootCardFlow();
+</script>
+</body></html>
